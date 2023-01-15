@@ -1,0 +1,81 @@
+@define paddle R1
+@define dirx R3
+@define diry R4
+@define ballx R5
+@define bally R6
+@define keys R7
+@define temp R8
+IMM dirx 1
+IMM diry 1
+IMM ballx 2
+IMM bally 7
+IMM paddle 20
+IMM temp 0
+.paddle_setup
+OUT %X 0
+OUT %Y paddle
+OUT %COLOR 247
+ADD paddle paddle 0xFFFFFFFF
+BGE .paddle_setup paddle 15
+.wall_setup
+OUT %X 63
+OUT %Y temp
+OUT %COLOR 247
+ADD temp temp 1
+BGE .wall_setup 37 temp
+.loop
+IN keys %GAMEPAD
+NOR keys keys keys
+NOR temp keys 0xFFFFFFFE
+BGE .not_w 0 temp
+BGE .not_w paddle 31
+  OUT %X 0
+  OUT %Y paddle
+  OUT %COLOR 247
+  ADD paddle paddle 6
+  OUT %X 0
+  OUT %Y paddle
+  OUT %COLOR 0
+  ADD paddle paddle 0xFFFFFFF9
+.not_w
+NOR temp keys 0xFFFFFFF7
+BGE .not_s 0 temp
+BGE .yes_s paddle 64
+BGE .not_s paddle 30
+.yes_s
+  ADD paddle paddle 1
+  OUT %X 0
+  OUT %Y paddle
+  OUT %COLOR 0
+  ADD paddle paddle 6
+  OUT %X 0
+  OUT %Y paddle
+  OUT %COLOR 247
+  ADD paddle paddle 0xFFFFFFFA
+.not_s
+OUT %X ballx
+OUT %Y bally
+OUT %COLOR 0
+BGE .not_over_y 35 bally
+  IMM diry 0xFFFFFFFF
+.not_over_y
+BGE .not_under_y bally 1
+  IMM diry 1
+.not_under_y
+BGE .not_over_x 61 ballx
+  IMM dirx 0xFFFFFFFF
+.not_over_x
+BGE .not_under_x ballx 2
+  NOR temp paddle paddle
+  ADD temp temp bally
+  BGE .fail temp 6
+  IMM dirx 1
+.not_under_x
+ADD ballx ballx dirx
+ADD bally bally diry
+OUT %X ballx
+OUT %Y bally
+OUT %COLOR 247
+BGE .loop temp 0
+.fail
+BGE .fail temp 0
