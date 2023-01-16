@@ -3,8 +3,8 @@ an assembly language for my minecraft titan computer
 
 titan:
 titan is a mincraft computer with the final goal to being able to opt preform any other 
-computer in terms of storage, graphics, memory and many other areas. the main parts ws 
-of the computer includes: 
+computer in terms of storage, graphics, memory and many other areas. ISA sheet here: https://docs.google.com/spreadsheets/d/10iQWIF9SvIxhDMI27a38wPMa0fUuqgq3G_UF8R2ksj4/edit#gid=0 
+the main parts of the computer includes: 
 -16kilobyte prom (16386 bytes)
 -16bit fixed point GPU (GCGP)
 -16bit or 16bit point CPU (RLP16)
