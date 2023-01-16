@@ -55,7 +55,7 @@ def change(instruction):
         print("IN",split[1],split[2])
     else:
         print(instruction)
-with open("C:\\Users\\User\\Documents\\pothon_codes\\CLP2\\urcl code.txt", "r") as f: # dhanges each line one after another
+with open("C:\\Users\\User\\Documents\\pothon_codes\\CLP2\\urcl code.txt", "r") as f: # changes each line one after another
     contents = f.readlines()
 for line in contents:
     change(line)
