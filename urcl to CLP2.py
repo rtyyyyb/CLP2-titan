@@ -1,4 +1,13 @@
 import time
+labellist = []
+addresslist = []
+with open("urcl code.txt", "r") as f:
+    contents = f.readlines()
+for line in contents:
+    if line[0] == ".":
+        length = len(line)
+        labellist.append(line[1:length - 1])
+        addresslist.append(contents.index(line))
 st = time.process_time() # getting start time
 define_list = []
 reg_list = []
@@ -55,10 +64,12 @@ def change(instruction):
         print("IN",split[1],split[2])
     else:
         print(instruction)
-with open("C:\\Users\\User\\Documents\\pothon_codes\\CLP2\\urcl code.txt", "r") as f: # changes each line one after another
+with open("urcl code.txt", "r") as f: # changes each line one after another
     contents = f.readlines()
 for line in contents:
     change(line)
 et = time.process_time() # get end time
 duration = et - st
 print("Done! compile took:",duration,"seconds") # finish statement
+print(labellist)
+print(addresslist)
