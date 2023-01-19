@@ -1,13 +1,33 @@
 import time
 labellist = []
 addresslist = []
+line_number = 0
 with open("urcl code.txt", "r") as f:
     contents = f.readlines()
 for line in contents:
     if line[0] == ".":
         length = len(line)
         labellist.append(line[1:length - 1])
-        addresslist.append(contents.index(line))
+        addresslist.append(line_number + 1)
+    instr = line.split()
+    if instr[0] == "ADD":
+        line_number = line_number + 4
+    elif instr[0] == "RSH":
+        line_number = line_number + 3
+    elif instr[0] == "LOD":
+        line_number = line_number + 2
+    elif instr[0] == "STR":
+        line_number = line_number + 2
+    elif instr[0] == "BGE":
+        line_number = line_number + 4
+    elif instr[0] == "NOR":
+        line_number = line_number + 4
+    elif instr[0] == "IMM":
+        line_number = line_number + 2
+    elif instr[0] == "OUT":
+        line_number = line_number + 1
+    elif instr[0] == "IN":
+        line_number = line_number + 1
 st = time.process_time() # getting start time
 define_list = []
 reg_list = []
@@ -62,8 +82,6 @@ def change(instruction):
             print("OUT",split[2],split[1])
     elif instr == "IN":
         print("IN",split[1],split[2])
-    else:
-        print(instruction)
 with open("urcl code.txt", "r") as f: # changes each line one after another
     contents = f.readlines()
 for line in contents:
